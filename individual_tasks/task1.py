@@ -1,13 +1,11 @@
-numbers = list()
-for t in range(int(input())):
-    number = input()
-    digit_count = len(number)
-    flag = True
-    for i in range(len(numbers)):
-        if numbers[i][0] == digit_count:
-            numbers[i][1] += 1
-            flag = False
-    if flag:
-        numbers.append(list((digit_count, 1)))
-numbers.sort(key=lambda item: item[0]+10_000*item[1])
-print(numbers[0][0], numbers[0][1])
+number_count = [0]*10
+for _ in range(int(input("num count:"))):
+    number = input("number:")
+    number_count[len(number)-1] += 1
+min_number_count = 10_001
+mini = 0
+for i in range(len(number_count)):
+    if number_count[i] < min_number_count and number_count[i] > 0:
+        min_number_count = number_count[i]
+        mini = i
+print(mini+1, min_number_count)
