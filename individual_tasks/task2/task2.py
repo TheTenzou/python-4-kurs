@@ -1,5 +1,5 @@
 def is_ancestor(person1, person2, family):
-    while family.get(person2):
+    while person2 in family:
         if family[person2] == person1:
             return True
         person2 = family[person2]
