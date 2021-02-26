@@ -1,19 +1,23 @@
+import os
+
+dirname = os.path.dirname(__file__)
+
 def task1():
-    file_name = "D:\My_Progs\python\python\lecture\lecture3\input1.txt"
+    file_name = os.path.join(dirname, 'input1.txt')
     with open(file_name, "r") as input_file:
         print(len(set(input_file.read().split())))
 
 
 def task2():
-    file_name = "D:\My_Progs\python\python\lecture\lecture3\input2.txt"
+    file_name = os.path.join(dirname, 'input2.txt')
     with open(file_name, "r") as input_file:
         for line in input_file:
             print(sum(map(lambda x: int(x), line.split())))
 
 
 def task3():
-    file_name = "D:\My_Progs\python\python\lecture\lecture3\input3.txt"
-    answare_file = "D:\My_Progs\python\python\lecture\lecture3\output3.txt"
+    file_name = os.path.join(dirname, 'input3.txt')
+    answare_file = os.path.join(dirname, 'output3.txt')
     with open(file_name, "r") as input_file:
         words = input_file.read().split()
         count_word = dict() 
@@ -25,7 +29,7 @@ def task3():
 
 
 def task4():
-    file_name = "D:\My_Progs\python\python\lecture\lecture3\input4.txt"
+    file_name = os.path.join(dirname, 'input4.txt')
     with open(file_name, "r") as input_file:
         lines = reversed(input_file.readlines())
         for line in lines:
@@ -33,7 +37,7 @@ def task4():
 
 
 def task5():
-    file_name = "D:\My_Progs\python\python\lecture\lecture3\input5.txt"
+    file_name = os.path.join(dirname, 'input5.txt')
     with open(file_name, "r") as input_file:
         chars = input_file.read() + " ";
         char_count = 0
@@ -50,8 +54,8 @@ def task5():
         
 
 def task6():
-    file_name = "D:\My_Progs\python\python\lecture\lecture3\input6.txt"
-    answare_name = "D:\My_Progs\python\python\lecture\lecture3\output6.txt"
+    file_name = os.path.join(dirname, 'input6.txt')
+    answare_name = os.path.join(dirname, 'output6.txt')
     with open(file_name, "r") as input_file:
         with open(answare_name, "w") as output_file:
             output_file.write(input_file.read()[::-1])

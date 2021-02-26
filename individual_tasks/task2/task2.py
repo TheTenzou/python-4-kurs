@@ -1,3 +1,5 @@
+import os
+
 def is_ancestor(person1, person2, family):
     while person2 in family:
         if family[person2] == person1:
@@ -5,8 +7,8 @@ def is_ancestor(person1, person2, family):
         person2 = family[person2]
     return False
         
-
-file_name = "D:\\My_Progs\\python\\python\\individual_tasks\\task2\\input.txt" 
+dirname = os.path.dirname(__file__)
+file_name = os.path.join(dirname, 'input.txt')
 with open(file_name, 'r') as input_file:
     count = int(input_file.readline())
     family_members = dict()
