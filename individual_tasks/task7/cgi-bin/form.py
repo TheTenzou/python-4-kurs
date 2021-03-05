@@ -26,42 +26,66 @@ cursor.execute(
     'insert into computers values(null,?,?,?)',
     (text1, text2, text3)
 )
+connection.commit()
 
 print("Content-type: text/html\n")
-print("""<!DOCTYPE HTML>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Обработка данных форм</title>
-        </head>
-        <body>""")
+print(
+    """
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Обработка данных форм</title>
+    </head>
+    <body>
+    """
+)
 
 print("<h1>Обработка данных форм!</h1>")
 print("<p>Name: {}</p>".format(text1))
 print("<p>CPU: {}</p>".format(text2))
 print("<p>GPU: {}</p>".format(text3))
 
-cursor.execute('''
-    select
-        pc.name,
-        cpu.name,
-        gpu.name
-    from 
-        computers pc
-        left join cpu on pc.cpu_id = cpu.id
-        left join gpu on pc.gpu_id = gpu.id
-''')
+cursor.execute(
+    '''
+        select
+            pc.name,
+            cpu.name,
+            gpu.name
+        from 
+            computers pc
+            left join cpu on pc.cpu_id = cpu.id
+            left join gpu on pc.gpu_id = gpu.id
+    '''
+)
 
-print('''
-    <caption>Таблица размеров обуви</caption>
+print(
+    '''
+    <table border="1">
+        <caption>Персональный компьютеры</caption>
+            <tr>
+                <th>Название</th>
+                <th>cpu</th>
+                <th>gpu</th>
+            </tr>
+    '''
+)
+
+for name, cpu, gpu in cursor.fetchall():
+    print(
+        f'''
         <tr>
-            <th>Название</th>
-            <th>cpu</th>
-            <th>gpu</th>
+            <td>{name}</td>
+            <td>{cpu}</td>
+            <td>{gpu}</td>
         </tr>
-''')
-for row in cursor.fetchall():
-    print('<tr><td>34,5</td><td>3,5</td><td>36</td><td>23</td></tr>')
+        '''
+    )
 
-print("""</body>
-        </html>""")
+print(
+    """
+            </table>
+        </body>
+    </html>
+    """
+)
