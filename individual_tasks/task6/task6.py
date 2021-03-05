@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import pprint
 
 dirname = os.path.dirname(__file__)
 db_name = os.path.join(dirname, 'computers.db')
@@ -73,10 +74,19 @@ cursor.executemany('insert into computers values(null,?,?,?)', pcs)
 connection.commit()
 
 cursor.execute("select * from cpu")
-print(cursor.fetchall())
+pprint.pprint(cursor.fetchall())
 
 cursor.execute("select * from gpu")
-print(cursor.fetchall())
+pprint.pprint(cursor.fetchall())
 
-cursor.execute("select * from computers")
-print(cursor.fetchall())
+cursor.execute('''
+    select
+        pc.name,
+        cpu.name,
+        gpu.name
+    from 
+        computers pc
+        left join cpu on pc.cpu_id = cpu.id
+        left join gpu on pc.gpu_id = gpu.id
+''')
+pprint.pprint(cursor.fetchall())
