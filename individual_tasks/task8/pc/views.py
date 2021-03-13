@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Computer
 from django.shortcuts import get_object_or_404
+
+from .models import Computer, Cpu, Gpu
+from .forms import ComputerForm
 
 # Create your views here.
 
@@ -29,3 +31,21 @@ def pc_details(request, id):
         'instance': instance
     }
     return render(request, 'pc_details.html', context)
+
+
+def pc_create(request):
+    form = ComputerForm()
+
+    if request.method =='POST':
+        name = request.POST.get('name')
+        cpu_id = request.POST.get('cpu')
+        gpu_id = request.POST.get('gpu')
+
+        cpu = get_object_or_404(Cpu, id=cpu_id)
+        gpu = get_object_or_404(Gpu, id=gpu_id)
+
+        Computer.objects.create(name=name,cpu=cpu, gpu=gpu)
+    context = {
+        'form':form,
+    }
+    return render(request, 'pc_create.html', context)
