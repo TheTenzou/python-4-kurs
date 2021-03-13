@@ -20,5 +20,5 @@ from pc.views import (pc_home, pc_details)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', pc_home),
-    path('details/', pc_details),
+    path('details/<int:id>', pc_details),
 ]

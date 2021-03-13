@@ -22,8 +22,8 @@ def pc_home(request):
     return render(request, 'index.html', context)   
 
 
-def pc_details(request):
-    instance = get_object_or_404(Computer, id=1)
+def pc_details(request, id):
+    instance = get_object_or_404(Computer, id=id)
     context = {
         'title': 'Detail',
         'instance': instance
