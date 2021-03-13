@@ -10,6 +10,9 @@ class Cpu(models.Model):
 
     def __unicode__(self):
         return self.name
+    
+    def __str__(self):
+        return self.name
 
 
 class Gpu(models.Model):
@@ -21,6 +24,9 @@ class Gpu(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 class Computer(models.Model):
     name = models.CharField(max_length=30)
@@ -28,4 +34,7 @@ class Computer(models.Model):
     gpu = models.ForeignKey(Gpu, on_delete=models.CASCADE)
 
     def __unicode__(self):
+        return self.name
+    
+    def __str__(self):
         return self.name

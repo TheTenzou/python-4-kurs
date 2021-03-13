@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{instance.name}}</h1>
+    <h2>Components:</h2>
+    <div>
+        <h3>{{instance.cpu}}</h3>
+
+        <p>core clock: {{instance.cpu.core_clock}}</p>
+        <p>core count: {{instance.cpu.core_count}}</p>
+
+        <h3>{{instance.gpu}}</h3>
+
+        <p>core clock: {{instance.gpu.core_clock}}</p>
+        <p>core count: {{instance.gpu.core_count}}</p>
+        <p>vram: {{instance.gpu.vram}}</p>
+    </div>
+</body>
+</html>
