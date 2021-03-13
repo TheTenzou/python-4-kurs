@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
 from .models import Computer, Cpu, Gpu
@@ -12,15 +12,6 @@ def pc_home(request):
     context = {
         'queryset': querySet
     }
-    print(querySet)
-    for i in querySet:
-        print(i)
-        print(type(i))
-        print('=========')
-        print(i.name)
-        print(i.cpu)
-        print(type(i.cpu))
-        print(type(i.gpu))
     return render(request, 'index.html', context)   
 
 
@@ -47,5 +38,22 @@ def pc_create(request):
         Computer.objects.create(name=name,cpu=cpu, gpu=gpu)
     context = {
         'form':form,
+    }
+    return render(request, 'pc_create.html', context)
+
+
+def pc_update(request, id=None):
+    instance = get_object_or_404(Computer, id=id)
+    form = ComputerForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_abolute_url())
+    
+    context = {
+        'name': instance.name,
+        'instance': instance,
+        'form': form,
     }
     return render(request, 'pc_create.html', context)
