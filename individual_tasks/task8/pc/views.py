@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 from .models import Computer, Cpu, Gpu
 from .forms import ComputerForm
@@ -36,6 +37,7 @@ def pc_create(request):
         gpu = get_object_or_404(Gpu, id=gpu_id)
 
         Computer.objects.create(name=name,cpu=cpu, gpu=gpu)
+        return HttpResponseRedirect('/')
     context = {
         'form':form,
     }
@@ -49,7 +51,7 @@ def pc_update(request, id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect(instance.get_abolute_url())
+        return HttpResponseRedirect(f'/details/{+instance.id}')
     
     context = {
         'name': instance.name,
