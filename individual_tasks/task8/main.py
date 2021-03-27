@@ -24,10 +24,6 @@ def have_name(node):
     return False
 
 
-# def valid_coordinates(node):
-#     if 
-
-
 def get_shop(node):
     for tag in node('tag'):
         if tag['k'] == 'name':
